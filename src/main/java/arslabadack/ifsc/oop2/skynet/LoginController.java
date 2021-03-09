@@ -13,7 +13,7 @@ public class LoginController {
 	private Button btnRegisterScreen;
 
 	@FXML
-	private void login() {
+	private void logged() {
 		App.changeResizable();
 		App.setRoot("main");
 	}

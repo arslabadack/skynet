@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="362.0" prefWidth="621.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.LoginController">
    <children>
@@ -26,14 +27,14 @@
          <children>
             <HBox fx:id="hboxUser" alignment="CENTER" fillHeight="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <TextField fx:id="txtUsername" alignment="CENTER" editable="false" prefWidth="149.0" promptText="Username" HBox.hgrow="NEVER">
+                  <TextField fx:id="txtUsername" alignment="CENTER" prefWidth="149.0" promptText="Username" HBox.hgrow="NEVER">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />
                      </cursor>
                   </TextField>
                </children>
                <padding>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" top="30.0" />
                </padding>
             </HBox>
             <HBox fx:id="hboxPassword" alignment="CENTER" fillHeight="false" style="-fx-background-color: #FFFFFF;">
@@ -50,20 +51,29 @@
             </HBox>
             <HBox fx:id="hboxLoginButtons" alignment="TOP_CENTER" fillHeight="false" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <Button fx:id="btnLogin" contentDisplay="CENTER" mnemonicParsing="false" onAction="#login" prefHeight="20.0" prefWidth="60.0" text="Sign In" textFill="#0404b4">
+                  <Button fx:id="btnLogin" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logged" prefHeight="20.0" prefWidth="80.0" text="Sign In">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="btnRegisterScreen" contentDisplay="CENTER" layoutX="134.0" layoutY="10.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="60.0" text="Sign Up" textFill="#0404b4">
+                  <Button fx:id="btnRegisterScreen" contentDisplay="CENTER" layoutX="134.0" layoutY="10.0" mnemonicParsing="false" onAction="#register" prefHeight="20.0" prefWidth="80.0" text="Sign Up">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="btnExit" contentDisplay="CENTER" layoutX="160.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="60.0" text="Exit" textFill="#0404b4" />
+                  <Button fx:id="btnExit" contentDisplay="CENTER" layoutX="160.0" layoutY="10.0" mnemonicParsing="false" onAction="#exit" prefHeight="20.0" prefWidth="80.0" text="Exit">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></Button>
                </children>
                <padding>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets top="50.0" />
                </padding>
             </HBox>
          </children>

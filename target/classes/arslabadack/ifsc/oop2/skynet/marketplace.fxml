@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.MarketplaceController">
+   <children>
+      <MenuBar layoutX="114.0" layoutY="32.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="32.0" prefWidth="1024.0" style="-fx-background-color: #E6E6E6;" AnchorPane.bottomAnchor="736.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#logout" text="Logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem fx:id="menuPreferences" mnemonicParsing="false" text="Preferences" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="menuAbout" mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.38649706457925637" prefHeight="160.0" prefWidth="200.0" style="-fx-background-color: #E6E6E6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <ImageView fitHeight="420.0" fitWidth="392.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+                     <image>
+                        <Image url="@images/mkt.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnNewSale" layoutX="2.0" layoutY="686.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newSale" prefHeight="30.0" prefWidth="100.0" text="New Sale" textFill="#0a0a0a" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="30.0">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="btnBack" layoutX="264.0" layoutY="686.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#back" prefHeight="30.0" prefWidth="100.0" text="Back" textFill="#0a0a0a" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="270.0">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></Button>
+                  <Label layoutX="110.0" layoutY="55.0" text="Marketplace" textFill="#535357" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0">
+                     <font>
+                        <Font name="Arial Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnEditSale" layoutX="128.0" layoutY="686.0" mnemonicParsing="false" onAction="#editSale" prefHeight="30.0" prefWidth="100.0" text="Edit Sale" textFill="#0a0a0a" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="150.0">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font></Button>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="624.0" style="-fx-background-color: #585858;">
+               <children>
+                  <Label layoutX="196.0" layoutY="60.0" text="All offers_" textFill="WHITE" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="Arial" size="30.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listAllSales" layoutX="15.0" layoutY="64.0" prefHeight="269.0" prefWidth="604.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="65.0" />
+                  <ListView fx:id="listMySales" layoutX="10.0" layoutY="417.0" prefHeight="285.0" prefWidth="604.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="417.0" />
+                  <Label layoutX="10.0" layoutY="360.0" text="My sales_" textFill="WHITE" AnchorPane.leftAnchor="10.0">
+                     <font>
+                        <Font name="Arial" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

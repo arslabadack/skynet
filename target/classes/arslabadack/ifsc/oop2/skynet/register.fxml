@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="register" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1EBEB;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.RegisterController">
    <children>
@@ -18,16 +20,22 @@
             <Image url="@images/nu.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER_RIGHT" fillWidth="false" layoutX="304.0" style="-fx-background-color: #F1EBEB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="304.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER_RIGHT" fillWidth="false" layoutX="246.0" prefHeight="400.0" prefWidth="354.0" style="-fx-background-color: #F1EBEB;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="246.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #F1EBEB;" VBox.vgrow="NEVER">
                <children>
-                  <Label text="Username" textFill="#29088a" HBox.hgrow="NEVER">
+                  <Label text="Username" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="txtRegisterUsername" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="NEVER" />
+                  <TextField fx:id="txtRegisterUsername" promptText="Be creative" HBox.hgrow="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
@@ -35,12 +43,18 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #F1EBEB;" VBox.vgrow="NEVER">
                <children>
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name" textFill="#29088a" HBox.hgrow="NEVER">
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Name" HBox.hgrow="NEVER">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="txtRegisterName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="NEVER" />
+                  <TextField fx:id="txtRegisterName" promptText="Your full name" HBox.hgrow="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
                </children>
                <padding>
                   <Insets left="10.0" />
@@ -48,12 +62,18 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="110.0" style="-fx-background-color: #F1EBEB;" VBox.vgrow="NEVER">
                <children>
-                  <Label text="E-mail" textFill="#29088a">
+                  <Label text="E-mail">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <TextField fx:id="txtRegisterEmail" HBox.hgrow="NEVER" />
+                  <TextField fx:id="txtRegisterEmail" promptText="email@email.com" HBox.hgrow="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
@@ -61,12 +81,18 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="210.0" style="-fx-background-color: #F1EBEB;" VBox.vgrow="NEVER">
                <children>
-                  <Label text="Password" textFill="#29088a">
+                  <Label text="Password">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <PasswordField fx:id="txtRegisterPassword" HBox.hgrow="NEVER" />
+                  <PasswordField fx:id="txtRegisterPassword" promptText="Do not use 123" HBox.hgrow="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></PasswordField>
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
@@ -74,27 +100,59 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
                <children>
-                  <Label text="Confirm password" textFill="#29088a">
+                  <Label prefHeight="15.0" prefWidth="124.0" text="Confirm password">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <PasswordField fx:id="txtRegisterPasswordConfirmation" editable="false" HBox.hgrow="NEVER" />
+                  <PasswordField fx:id="txtRegisterPasswordConfirmation" promptText="Say it again" HBox.hgrow="NEVER">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></PasswordField>
                </children>
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #F1EBEB;" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <Button fx:id="btnRegister" mnemonicParsing="false" text="Register" textFill="#29088a">
+                  <Label text="Birthdate">
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="10.0" />
                      </HBox.margin>
-                  </Button>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtRegisterBirthdate" accessibleRole="DATE_PICKER" promptText="dd/mm/yyyy">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="20.0" top="20.0" />
+                  <Insets left="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <Label text="Relationship">
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtRegisterRelationship" promptText="Crushable or not">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextField>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
                </padding>
             </HBox>
          </children>
@@ -105,5 +163,20 @@
             <Insets right="30.0" />
          </padding>
       </VBox>
+      <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #F1EBEB;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0">
+         <children>
+            <Button fx:id="btnRegister" mnemonicParsing="false" text="Register">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" top="20.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>
