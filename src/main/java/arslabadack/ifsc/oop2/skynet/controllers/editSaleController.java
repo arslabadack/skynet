@@ -1,5 +1,6 @@
-package arslabadack.ifsc.oop2.skynet;
+package arslabadack.ifsc.oop2.skynet.controllers;
 
+import arslabadack.ifsc.oop2.skynet.App;
 import javafx.fxml.FXML;
 
 public class editSaleController {

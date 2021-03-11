@@ -15,6 +15,7 @@ public class App extends Application {
 		this.stage = stage;
 		stage.setScene(FXMLUtil.loadScene("login"));
 		stage.setResizable(false);
+		stage.setTitle("Skynet");
 		stage.show();
 	}
 
@@ -22,10 +23,7 @@ public class App extends Application {
 		stage.setScene(FXMLUtil.loadScene(fxml));
 	}
 
-	public static void main(String[] args) {
-		launch();
-	}
-	
+
 	public static void changeResizable() {
 		if (stage.isResizable())
 			stage.setResizable(false);

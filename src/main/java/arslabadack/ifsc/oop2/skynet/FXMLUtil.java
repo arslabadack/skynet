@@ -2,6 +2,7 @@ package arslabadack.ifsc.oop2.skynet;
 
 import java.io.IOException;
 
+import arslabadack.ifsc.oop2.skynet.controllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;

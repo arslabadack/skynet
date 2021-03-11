@@ -1,5 +1,7 @@
-package arslabadack.ifsc.oop2.skynet;
+package arslabadack.ifsc.oop2.skynet.controllers;
 
+import arslabadack.ifsc.oop2.skynet.App;
+import arslabadack.ifsc.oop2.skynet.FXMLUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;

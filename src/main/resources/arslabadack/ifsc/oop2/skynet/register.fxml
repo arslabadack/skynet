@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="register" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1EBEB;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.RegisterController">
+<AnchorPane fx:id="register" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F1EBEB;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.controllers.RegisterController">
    <children>
       <ImageView fitHeight="422.0" fitWidth="590.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -117,24 +117,21 @@
                   <Insets left="10.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Label text="Birthdate">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Arial Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtRegisterBirthdate" accessibleRole="DATE_PICKER" promptText="dd/mm/yyyy">
-                     <cursor>
-                        <Cursor fx:constant="TEXT" />
-                     </cursor></TextField>
-               </children>
+            <HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
                <padding>
                   <Insets left="10.0" top="10.0" />
                </padding>
+               <children>
+                  <Label text="Birthdate">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="txtRegisterBirthdate" promptText="01/01/2021" />
+               </children>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                <children>
@@ -165,7 +162,7 @@
       </VBox>
       <HBox alignment="CENTER_RIGHT" style="-fx-background-color: #F1EBEB;" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="30.0">
          <children>
-            <Button fx:id="btnRegister" mnemonicParsing="false" text="Register">
+            <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#newUser" text="Register">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
