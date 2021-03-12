@@ -26,11 +26,17 @@ public class User {
 	@ManyToMany
 	private List<Marketplace> products;
 
+	@ManyToMany
+	private List<Events> events;
+
+	@ManyToMany
+	private List<Post> posts;
+
 	public User() {
 	}
 
 	public User(String username, String name, String email, String password, String birthdate, String relationship,
-			List<Marketplace> products) {
+			List<Marketplace> products, List<Events> events, List<Post> posts) {
 		super();
 		this.username = username;
 		this.name = name;
@@ -39,6 +45,8 @@ public class User {
 		this.birthdate = birthdate;
 		this.relationship = relationship;
 		this.products = new ArrayList<>();
+		this.events = new ArrayList<>();
+		this.posts = new ArrayList<>();
 	}
 
 	public User(String username, String name, String email, String password, String birthdate, String relationship) {
@@ -111,6 +119,22 @@ public class User {
 
 	public void setProducts(List<Marketplace> products) {
 		this.products = products;
+	}
+
+	public List<Events> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Events> events) {
+		this.events = events;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override

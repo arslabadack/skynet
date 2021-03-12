@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1024.0" style="-fx-background-color: #585858;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.controllers.PostController">
+   <children>
+      <MenuBar layoutX="114.0" layoutY="32.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" style="-fx-background-color: #E6E6E6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="menuLogout" mnemonicParsing="false" onAction="#logout" text="Logout" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem fx:id="menuPreferences" mnemonicParsing="false" text="Preferences" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="menuAbout" mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <ListView fx:id="listPost" layoutX="443.0" layoutY="123.0" prefHeight="480.0" prefWidth="576.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="425.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="txtPostId" layoutX="153.0" layoutY="191.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.leftAnchor="153.0" />
+      <TextArea fx:id="txtPostContent" layoutX="152.0" layoutY="259.0" prefHeight="125.0" prefWidth="240.0" AnchorPane.leftAnchor="152.0" />
+      <Button fx:id="btnSavePost" layoutX="172.0" layoutY="447.0" mnemonicParsing="false" prefWidth="100.0" text="Save" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="170.0" />
+      <Button fx:id="btnDeletePost" layoutX="292.0" layoutY="447.0" mnemonicParsing="false" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="290.0" />
+      <Separator layoutX="406.0" layoutY="178.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="30.0" />
+      <Label layoutX="47.0" layoutY="196.0" text="Post ID" textFill="WHITE" AnchorPane.leftAnchor="40.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="259.0" text="New post content" textFill="WHITE" AnchorPane.leftAnchor="40.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="425.0" layoutY="53.0" text="Your Posts" textFill="WHITE" AnchorPane.leftAnchor="425.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="23.0" layoutY="43.0" text="Edit Your Posts" textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

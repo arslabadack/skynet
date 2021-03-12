@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 
+import arslabadack.ifsc.oop2.skynet.entities.Events;
+import arslabadack.ifsc.oop2.skynet.entities.Marketplace;
 import arslabadack.ifsc.oop2.skynet.entities.User;
 
 public class UserDAO implements InterfaceDAO<User> {
@@ -21,9 +23,16 @@ public class UserDAO implements InterfaceDAO<User> {
 			User original = get(t.getUsername());
 			em.getTransaction().begin();
 			original.setPassword(t.getPassword());
+			original.getProducts().clear();
+			for (Marketplace mk : t.getProducts())
+				original.getProducts().add(mk);
+			em.getTransaction().commit();
+			original.getEvents().clear();
+			for (Events ev : t.getEvents())
+				original.getEvents().add(ev);
 			em.getTransaction().commit();
 		}
-		
+
 	}
 
 	@Override
@@ -32,7 +41,7 @@ public class UserDAO implements InterfaceDAO<User> {
 		em.getTransaction().begin();
 		em.remove(t);
 		em.getTransaction().commit();
-		
+
 	}
 
 	@Override

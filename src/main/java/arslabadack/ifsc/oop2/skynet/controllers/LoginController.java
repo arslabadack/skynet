@@ -58,8 +58,9 @@ public class LoginController {
 		App.changeResizable();
 		App.setRoot("main");
 		MainController controller = FXMLUtil.getMainController();
-	//	controller.updateUserInfo(user);
-
+		controller.userInfo(user);
+		
+		MainController.setUser(user);
 		App.changeResizable();
 		App.setRoot("main");
 	}
