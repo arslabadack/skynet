@@ -34,6 +34,8 @@ public class User {
 
 	public User() {
 	}
+	
+	
 
 	public User(String username, String name, String email, String password, String birthdate, String relationship,
 			List<Marketplace> products, List<Events> events, List<Post> posts) {

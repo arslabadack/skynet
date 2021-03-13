@@ -1,7 +1,10 @@
 package arslabadack.ifsc.oop2.skynet.controllers;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import arslabadack.ifsc.oop2.skynet.AlertUtil;
 import arslabadack.ifsc.oop2.skynet.App;
@@ -11,15 +14,18 @@ import arslabadack.ifsc.oop2.skynet.entities.Marketplace;
 import arslabadack.ifsc.oop2.skynet.entities.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class MarketplaceController {
 
-	private static User user;
+public class MarketplaceController implements Initializable {
 
 	@FXML
 	private Button btnSaveSale;
@@ -44,21 +50,44 @@ public class MarketplaceController {
 
 	@FXML
 	private ListView<String> listMySales;
-
-	public static void setUser(User u) {
-		user = u;
-	}
+	
+	private static User user;
+	
 
 	@FXML
 	private void logout() {
-		user = null;
-		App.changeResizable();
-		App.setRoot("login");
+		try {
+			user = null;
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+			Scene scene = new Scene(fxmlLoader.load());
+			Stage stage = (Stage) btnSaveSale.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setResizable(false);
+			stage.show();
+		} catch (IOException e) {
+			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load login scene", e);
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
 	private void back() {
-		App.setRoot("main");
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main.fxml"));
+			Scene scene = new Scene(fxmlLoader.load());
+			Stage stage = (Stage) btnSaveSale.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setResizable(true);
+			stage.show();
+
+			MainController controller = fxmlLoader.getController();
+			controller.userInfo(user);
+			MainController.setUser(user);
+
+		} catch (IOException e) {
+			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
@@ -82,31 +111,39 @@ public class MarketplaceController {
 			alert.showAndWait();
 			return;
 		}
+		user.getProducts().add(new Marketplace(productName, productPrice, productDescription));
+		new UserDAO().persist(user);
+		
+		showMySales();
 
-		new MarketplaceDAO().persist(new Marketplace(productName, productPrice, productDescription));
-
-		AlertUtil.info("DONE", "DONE", "Product added").show();
 	}
-
+	
 	@FXML
 	private void showMySales() {
 		if (user == null)
 			return;
-		List<String> myProducts = new ArrayList<>();
+		List<String> userProducts = new ArrayList<>();
 		for (Marketplace p : user.getProducts()) {
-			myProducts.add(p.getProductName());
-			myProducts.add(p.getProductPrice());
-			myProducts.add(p.getProductDescription());
+			userProducts.add(p.getProductName());
+			userProducts.add(p.getProductPrice());
+			userProducts.add(p.getProductDescription());
 		}
-		listMySales.setItems(FXCollections.observableArrayList(myProducts));
+		listMySales.setItems(FXCollections.observableArrayList(userProducts));
 	}
 
 	@FXML
 	private void removeProducts() {
-		String productName = listMySales.getSelectionModel().getSelectedItem();
-		Marketplace product = new MarketplaceDAO().get(productName);
+		String productSelected = listMySales.getSelectionModel().getSelectedItem();
+		Marketplace product = new MarketplaceDAO().get(productSelected);
 		user.getProducts().remove(product);
 		new UserDAO().persist(user);
 		showMySales();
 	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		user.getUsername();
+		
+	}
+
 }

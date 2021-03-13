@@ -1,18 +1,21 @@
 package arslabadack.ifsc.oop2.skynet.controllers;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import arslabadack.ifsc.oop2.skynet.AlertUtil;
-import arslabadack.ifsc.oop2.skynet.App;
 import arslabadack.ifsc.oop2.skynet.db.UserDAO;
 import arslabadack.ifsc.oop2.skynet.entities.User;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class RegisterController {
+public class RegisterController implements Initializable {
 
 	@FXML
 	private Button btnRegister;
@@ -37,11 +40,6 @@ public class RegisterController {
 
 	@FXML
 	private TextField txtRegisterRelationship;
-
-	@FXML
-	private void back() {
-		App.setRoot("login");
-	}
 
 	@FXML
 	private void exit() {
@@ -105,6 +103,12 @@ public class RegisterController {
 		AlertUtil.info("DONE", "DONE", "You are registered in Skynet").show();
 		
 		close();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

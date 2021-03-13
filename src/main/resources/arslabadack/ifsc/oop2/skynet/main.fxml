@@ -39,31 +39,29 @@
                <children>
                   <Button fx:id="btnProfile" layoutX="66.0" layoutY="549.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Profile" AnchorPane.leftAnchor="65.0">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Arial" size="12.0" />
                      </font></Button>
                   <Button fx:id="btnMarketplace" layoutX="66.0" layoutY="592.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#marketplace" prefHeight="20.0" prefWidth="100.0" text="Marketplace" AnchorPane.leftAnchor="65.0">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Arial" size="12.0" />
                      </font></Button>
                   <Button fx:id="btnPost" layoutX="66.0" layoutY="674.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#post" prefHeight="20.0" prefWidth="100.0" text="Posts" AnchorPane.leftAnchor="65.0">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Arial" size="12.0" />
                      </font></Button>
                   <Button fx:id="btnEvents" layoutX="66.0" layoutY="635.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#events" prefHeight="20.0" prefWidth="100.0" text="Events" AnchorPane.leftAnchor="65.0">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Arial" size="12.0" />
                      </font></Button>
-                  <Label layoutX="33.0" layoutY="73.0" text="Logged as:" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblLoggedUser" layoutX="87.0" layoutY="115.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0">
+                  <Label fx:id="lblLoggedUser" layoutX="14.0" layoutY="20.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listBio" layoutX="15.0" layoutY="124.0" prefHeight="348.0" prefWidth="225.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="115.0" />
+                  <Label fx:id="lblFullName" layoutX="34.0" layoutY="104.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+                  <Label fx:id="lblEmail" layoutX="34.0" layoutY="146.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+                  <Label fx:id="lblBirthdate" layoutX="34.0" layoutY="184.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+                  <Label fx:id="lblRelationship" layoutX="34.0" layoutY="227.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
                </children>
             </AnchorPane>
           <AnchorPane>
@@ -72,7 +70,7 @@
                   <TextField fx:id="txtNewPost" focusTraversable="false" layoutX="14.0" layoutY="642.0" prefHeight="107.0" promptText="What' s on your mind?" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="100.0" />
                   <Button fx:id="btnSend" layoutX="691.0" layoutY="615.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newPost" prefHeight="40.0" prefWidth="60.0" text="Send" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="20.0">
                      <font>
-                        <Font name="Arial Bold" size="12.0" />
+                        <Font name="Arial" size="12.0" />
                      </font></Button>
                   <ListView fx:id="listPosts" layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
                </children>

@@ -17,6 +17,8 @@ public class Marketplace {
 	private String productPrice;
 
 	private String productDescription;
+	
+	private User user;
 
 	public Marketplace() {
 

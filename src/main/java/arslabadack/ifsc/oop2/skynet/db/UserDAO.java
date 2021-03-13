@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 
 import arslabadack.ifsc.oop2.skynet.entities.Events;
 import arslabadack.ifsc.oop2.skynet.entities.Marketplace;
+import arslabadack.ifsc.oop2.skynet.entities.Post;
 import arslabadack.ifsc.oop2.skynet.entities.User;
 
 public class UserDAO implements InterfaceDAO<User> {
@@ -26,10 +27,12 @@ public class UserDAO implements InterfaceDAO<User> {
 			original.getProducts().clear();
 			for (Marketplace mk : t.getProducts())
 				original.getProducts().add(mk);
-			em.getTransaction().commit();
 			original.getEvents().clear();
 			for (Events ev : t.getEvents())
 				original.getEvents().add(ev);
+			original.getPosts().clear();
+			for (Post po : t.getPosts())
+				original.getPosts().add(po);
 			em.getTransaction().commit();
 		}
 

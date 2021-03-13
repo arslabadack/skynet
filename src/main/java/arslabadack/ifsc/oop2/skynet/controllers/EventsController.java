@@ -1,16 +1,25 @@
 package arslabadack.ifsc.oop2.skynet.controllers;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import arslabadack.ifsc.oop2.skynet.AlertUtil;
 import arslabadack.ifsc.oop2.skynet.App;
 import arslabadack.ifsc.oop2.skynet.db.EventsDAO;
 import arslabadack.ifsc.oop2.skynet.entities.Events;
+import arslabadack.ifsc.oop2.skynet.entities.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class EventsController {
+public class EventsController implements Initializable {
 
 	@FXML
 	private Button btnCreateEvent;
@@ -52,18 +61,45 @@ public class EventsController {
 	private TextField txtEventNewDescription;
 
 	@FXML
-	private ListView listEvents;
+	private ListView<String> listEvents;
+	
+	private User user;
 	
 
 	@FXML
 	private void logout() {
-		App.changeResizable();
-		App.setRoot("login");
+		try {
+			user = null;
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+			Scene scene = new Scene(fxmlLoader.load());
+			Stage stage = (Stage) btnCreateEvent.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setResizable(false);
+			stage.show();
+		} catch (IOException e) {
+			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load login scene", e);
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
 	private void back() {
-		App.setRoot("main");
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("main.fxml"));
+			Scene scene = new Scene(fxmlLoader.load());
+			Stage stage = (Stage) btnCreateEvent.getScene().getWindow();
+			stage.setScene(scene);
+			stage.setResizable(true);
+			stage.show();
+
+			MainController controller = fxmlLoader.getController();
+			controller.userInfo(user);
+			MainController.setUser(user);
+
+		} catch (IOException e) {
+			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
+			alert.showAndWait();
+		}
 	}
 	
 	@FXML
@@ -94,10 +130,19 @@ public class EventsController {
 			return;
 		}
 
-
 		new EventsDAO().persist(new Events(eventName, eventDate, eventLocal, eventDescription));
 
-		AlertUtil.info("DONE", "DONE", "Event created").show();
+//		AlertUtil.info("DONE", "DONE", "Event created").show();
+	}
+
+	public static void setUser(User user) {
+		
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
