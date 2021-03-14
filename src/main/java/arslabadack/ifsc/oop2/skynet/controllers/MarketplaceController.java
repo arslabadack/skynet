@@ -20,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -46,13 +48,26 @@ public class MarketplaceController implements Initializable {
 	private TextArea txtProductDescription;
 
 	@FXML
-	private ListView<String> listAllSales;
+	private ListView<Marketplace> listAllSales;
 
 	@FXML
-	private ListView<String> listMySales;
+	private TableView<Marketplace> listMySales;
+	
+	@FXML
+	private TableColumn<Marketplace, String> clmProduct;
+	
+	@FXML
+	private TableColumn<Marketplace, String> clmPrice;
+	
+	@FXML
+	private TableColumn<Marketplace, String> clmDescription;
+	
 	
 	private static User user;
 	
+	public void setUser(User u) {
+		user = u;
+	}
 
 	@FXML
 	private void logout() {
@@ -111,7 +126,12 @@ public class MarketplaceController implements Initializable {
 			alert.showAndWait();
 			return;
 		}
-		user.getProducts().add(new Marketplace(productName, productPrice, productDescription));
+		Marketplace mkt = new Marketplace(productName, productPrice, productDescription);
+		new MarketplaceDAO().persist(mkt);
+		if (user.getProducts() == null) {
+			user.setProducts(new ArrayList<Marketplace>());
+		}
+		user.getProducts().add(mkt);
 		new UserDAO().persist(user);
 		
 		showMySales();
@@ -122,28 +142,25 @@ public class MarketplaceController implements Initializable {
 	private void showMySales() {
 		if (user == null)
 			return;
-		List<String> userProducts = new ArrayList<>();
+		List<Marketplace> userProducts = new ArrayList<>();
 		for (Marketplace p : user.getProducts()) {
-			userProducts.add(p.getProductName());
-			userProducts.add(p.getProductPrice());
-			userProducts.add(p.getProductDescription());
+			userProducts.add(new Marketplace(p.getProductName(), p.getProductPrice(), p.getProductDescription()));
 		}
 		listMySales.setItems(FXCollections.observableArrayList(userProducts));
 	}
 
 	@FXML
 	private void removeProducts() {
-		String productSelected = listMySales.getSelectionModel().getSelectedItem();
-		Marketplace product = new MarketplaceDAO().get(productSelected);
-		user.getProducts().remove(product);
-		new UserDAO().persist(user);
-		showMySales();
+//		String productSelected = listMySales.getSelectionModel().getSelectedItem();
+//		Marketplace product = new MarketplaceDAO().get(productSelected);
+//		user.getProducts().remove(product);
+//		new UserDAO().persist(user);
+//		showMySales();
 	}
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		user.getUsername();
-		
 	}
 
 }

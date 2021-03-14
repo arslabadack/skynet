@@ -2,13 +2,17 @@ package arslabadack.ifsc.oop2.skynet.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import arslabadack.ifsc.oop2.skynet.AlertUtil;
 import arslabadack.ifsc.oop2.skynet.App;
 import arslabadack.ifsc.oop2.skynet.db.EventsDAO;
+import arslabadack.ifsc.oop2.skynet.db.UserDAO;
 import arslabadack.ifsc.oop2.skynet.entities.Events;
 import arslabadack.ifsc.oop2.skynet.entities.User;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,10 +65,13 @@ public class EventsController implements Initializable {
 	private TextField txtEventNewDescription;
 
 	@FXML
-	private ListView<String> listEvents;
-	
+	private ListView<Events> listEvents;
+
 	private User user;
 	
+	public void setUser(User u) {
+		user = u;
+	}
 
 	@FXML
 	private void logout() {
@@ -101,7 +108,7 @@ public class EventsController implements Initializable {
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	private void newEvent() {
 		String eventName = txtEventName.getText();
@@ -130,19 +137,33 @@ public class EventsController implements Initializable {
 			return;
 		}
 
-		new EventsDAO().persist(new Events(eventName, eventDate, eventLocal, eventDescription));
+		Events evn = new Events(eventName, eventDate, eventLocal, eventDescription);
+		new EventsDAO().persist(evn);
+		if (user.getEvents() == null) {
+			user.setEvents(new ArrayList<Events>());
+		}
+		user.getEvents().add(evn);
+		new UserDAO().persist(user);
 
-//		AlertUtil.info("DONE", "DONE", "Event created").show();
+		showEvents();
 	}
 
-	public static void setUser(User user) {
-		
+	@FXML
+	private void showEvents() {
+		if (user == null)
+			return;
+		List<Events> userEvents = new ArrayList<>();
+		for (Events evn : user.getEvents()) {
+			userEvents.add(
+					new Events(evn.getEventName(), evn.getEventDate(), evn.getEventLocal(), evn.getEventDescription()));
+		}
+		listEvents.setItems(FXCollections.observableArrayList(userEvents));
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

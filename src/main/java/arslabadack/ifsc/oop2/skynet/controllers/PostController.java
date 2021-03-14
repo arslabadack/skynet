@@ -25,7 +25,7 @@ public class PostController implements Initializable {
 
 	@FXML
 	private Button btnDeletePost;
-	
+
 	@FXML
 	private Button btnBack;
 
@@ -37,9 +37,13 @@ public class PostController implements Initializable {
 
 	@FXML
 	private ListView<String> listPost;
-	
+
 	private User user;
-	
+
+	public void setUser(User u) {
+		user = u;
+	}
+
 	@FXML
 	private void logout() {
 		try {
@@ -76,16 +80,10 @@ public class PostController implements Initializable {
 		}
 	}
 
-	public static void setUser(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 }

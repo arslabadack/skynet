@@ -18,8 +18,6 @@ public class Marketplace {
 
 	private String productDescription;
 	
-	private User user;
-
 	public Marketplace() {
 
 	}

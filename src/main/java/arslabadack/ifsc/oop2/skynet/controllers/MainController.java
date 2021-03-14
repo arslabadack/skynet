@@ -2,13 +2,18 @@ package arslabadack.ifsc.oop2.skynet.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import arslabadack.ifsc.oop2.skynet.AlertUtil;
 import arslabadack.ifsc.oop2.skynet.App;
 import arslabadack.ifsc.oop2.skynet.db.PostDAO;
+import arslabadack.ifsc.oop2.skynet.db.UserDAO;
+import arslabadack.ifsc.oop2.skynet.entities.Events;
 import arslabadack.ifsc.oop2.skynet.entities.Post;
 import arslabadack.ifsc.oop2.skynet.entities.User;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,10 +43,7 @@ public class MainController implements Initializable {
 	private TextField txtNewPost;
 
 	@FXML
-	private ListView<String> listPosts;
-
-	@FXML
-	private ListView<String> listBio;
+	private ListView<Post> listPosts;
 
 	@FXML
 	private Label lblLoggedUser;
@@ -57,9 +59,9 @@ public class MainController implements Initializable {
 
 	@FXML
 	private Label lblRelationship;
-	
-	private static User user;
 
+	private static User user;
+	
 	public static void setUser(User u) {
 		user = u;
 	}
@@ -90,9 +92,8 @@ public class MainController implements Initializable {
 			stage.setResizable(true);
 			stage.show();
 
-			MainController controller = fxmlLoader.getController();
-			controller.userInfo(user);
-			MainController.setUser(user);
+			MarketplaceController controller = fxmlLoader.getController();
+			controller.setUser(user);
 
 		} catch (IOException e) {
 			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
@@ -112,7 +113,6 @@ public class MainController implements Initializable {
 
 			MainController controller = fxmlLoader.getController();
 			controller.userInfo(user);
-			EventsController.setUser(user);
 
 		} catch (IOException e) {
 			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
@@ -132,7 +132,6 @@ public class MainController implements Initializable {
 
 			MainController controller = fxmlLoader.getController();
 			controller.userInfo(user);
-			PostController.setUser(user);
 
 		} catch (IOException e) {
 			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
@@ -151,12 +150,39 @@ public class MainController implements Initializable {
 
 	@FXML
 	private void newPost() {
-		String post = txtNewPost.getText();
-		new PostDAO().persist(new Post(post));
+		String newPost = txtNewPost.getText();
+
+		if (newPost.isBlank()) {
+			Alert alert = AlertUtil.error("ERROR", "ERROR", "Missing post", null);
+			alert.showAndWait();
+			return;
+		}
+
+		Post ps = new Post(newPost);
+		new PostDAO().persist(ps);
+		if (user.getPosts() == null) {
+			user.setPosts(new ArrayList<Post>());
+		}
+		user.getPosts().add(ps);
+		new UserDAO().persist(user);
+		txtNewPost.clear();
+
+		showPosts();
+	}
+
+	@FXML
+	private void showPosts() {
+		if (user == null)
+			return;
+		List<Post> userPosts = new ArrayList<>();
+		for (Post ps : user.getPosts()) {
+			userPosts.add(new Post(ps.getNewPost()));
+		}
+		listPosts.setItems(FXCollections.observableArrayList(userPosts));
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		MainController.setUser(user);
+		
 	}
 }
