@@ -1,0 +1,16 @@
+  
+{
+    "user": {
+        "username": "batman",
+		"password": "justice"
+    },
+    "user": {
+        "username": "clark_kent",
+        "password": "krypton"
+    },
+    "user": {
+        "username": "aquaman",
+        "password": "fish"
+    }
+
+}

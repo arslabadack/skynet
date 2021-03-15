@@ -22,7 +22,7 @@ public class UtilDB {
 
 	private static EntityManagerFactory getEntityManagerFactory() {
 		if (entityManagerFactory == null)
-			entityManagerFactory = Persistence.createEntityManagerFactory("teste");
+			entityManagerFactory = Persistence.createEntityManagerFactory("Skynet");
 		return entityManagerFactory;
 	}
 
@@ -40,17 +40,8 @@ public class UtilDB {
 	}
 
 	public static void initDB() {
-
 		for (User u : consumeAPI(consultAPI()))
 			new UserDAO().persist(u);
-
-//		Game cs = new Game("Counter-strike", "Joguinho de tiro", 10.5);
-//		Game nfs = new Game("Need for Speed", "Joguinho de corrida de carrinhos", 15.5);
-//		new GameDAO().persist(cs);
-//		new GameDAO().persist(nfs);
-//
-//		u.getGames().add(cs);
-//		new UserDAO().persist(u);
 	}
 	
 	public static List<User> consumeAPI(List<String> users) {
