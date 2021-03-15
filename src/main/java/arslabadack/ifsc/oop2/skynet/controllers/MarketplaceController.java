@@ -19,18 +19,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 
 public class MarketplaceController implements Initializable {
 
 	@FXML
 	private Button btnSaveSale;
+
+	@FXML
+	private Button btnEditSale;
 
 	@FXML
 	private Button btnRemoveSale;
@@ -48,25 +49,47 @@ public class MarketplaceController implements Initializable {
 	private TextArea txtProductDescription;
 
 	@FXML
-	private ListView<Marketplace> listAllSales;
+	private ListView<String> listMySales;
 
 	@FXML
-	private TableView<Marketplace> listMySales;
-	
+	private Label lblProduct;
+
 	@FXML
-	private TableColumn<Marketplace, String> clmProduct;
-	
+	private Label lblPrice;
+
 	@FXML
-	private TableColumn<Marketplace, String> clmPrice;
-	
+	private Label lblDescription;
+
 	@FXML
-	private TableColumn<Marketplace, String> clmDescription;
-	
-	
+	private ListView<String> listAllSales;
+
+	@FXML
+	private Label lblAllProducts;
+
+	@FXML
+	private Label lblAllPrices;
+
+	@FXML
+	private Label lblAllDescriptions;
+
 	private static User user;
-	
+
+	private boolean updating = false;
+
 	public void setUser(User u) {
 		user = u;
+	}
+
+	@FXML
+	private void clearFields() {
+		txtProductName.clear();
+		txtProductPrice.clear();
+		txtProductDescription.clear();
+		txtProductName.setDisable(false);
+
+		defaultLabel();
+		showMySales();
+		showAllSales();
 	}
 
 	@FXML
@@ -128,39 +151,90 @@ public class MarketplaceController implements Initializable {
 		}
 		Marketplace mkt = new Marketplace(productName, productPrice, productDescription);
 		new MarketplaceDAO().persist(mkt);
-		if (user.getProducts() == null) {
-			user.setProducts(new ArrayList<Marketplace>());
+		if (!updating) {
+			if (user.getProducts() == null) {
+				user.setProducts(new ArrayList<Marketplace>());
+			}
+			user.getProducts().add(mkt);
+			new UserDAO().persist(user);
+		} else {
+			user = new UserDAO().get(user.getUsername());
 		}
-		user.getProducts().add(mkt);
-		new UserDAO().persist(user);
-		
-		showMySales();
+
+		clearFields();
 
 	}
-	
+
 	@FXML
 	private void showMySales() {
 		if (user == null)
 			return;
-		List<Marketplace> userProducts = new ArrayList<>();
+		List<String> userProducts = new ArrayList<>();
 		for (Marketplace p : user.getProducts()) {
-			userProducts.add(new Marketplace(p.getProductName(), p.getProductPrice(), p.getProductDescription()));
+			userProducts.add(p.getProductName());
 		}
 		listMySales.setItems(FXCollections.observableArrayList(userProducts));
+	}
+	
+	private void defaultLabel() {
+		lblProduct.setText("Product");
+		lblPrice.setText("Price");
+		lblDescription.setText("Description");
+		lblAllProducts.setText("Product");
+		lblAllPrices.setText("Price");
+		lblAllDescriptions.setText("Description");
+	}
+
+	@FXML
+	private void updateDescription() {
+		String productSelected = listMySales.getSelectionModel().getSelectedItem();
+		Marketplace product = new MarketplaceDAO().get(productSelected);
+		txtProductName.setText(product.getProductName());
+		txtProductName.setDisable(true);
+		lblProduct.setText(product.getProductName());
+		lblPrice.setText(product.getProductPrice());
+		lblDescription.setText(product.getProductDescription());
+		btnRemoveSale.setDisable(false);
+		updating = true;
+	}
+
+	@FXML
+	private void showAllSales() {
+		if (user == null)
+			return;
+		List<String> userProducts = new ArrayList<>();
+		for (Marketplace p : new MarketplaceDAO().getAll()) {
+			userProducts.add(p.getProductName());
+		}
+		listAllSales.setItems(FXCollections.observableArrayList(userProducts));
+	}
+
+	@FXML
+	private void updateAllDescription() {
+		String productSelected = listAllSales.getSelectionModel().getSelectedItem();
+		Marketplace product = new MarketplaceDAO().get(productSelected);
+		lblAllProducts.setText(product.getProductName());
+		lblAllPrices.setText(product.getProductPrice());
+		lblAllDescriptions.setText(product.getProductDescription());
 	}
 
 	@FXML
 	private void removeProducts() {
-//		String productSelected = listMySales.getSelectionModel().getSelectedItem();
-//		Marketplace product = new MarketplaceDAO().get(productSelected);
-//		user.getProducts().remove(product);
-//		new UserDAO().persist(user);
-//		showMySales();
+		String productSelected = listMySales.getSelectionModel().getSelectedItem();
+		Marketplace product = new MarketplaceDAO().get(productSelected);
+		for (int i = 0; i < user.getProducts().size(); i++) {
+			if (user.getProducts().get(i).getProductName().contentEquals(productSelected)) {
+				user.getProducts().remove(i);
+			}
+		}
+		new MarketplaceDAO().remove(product);
+		new UserDAO().persist(user);
+		clearFields();
 	}
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		btnRemoveSale.setDisable(true);
 	}
 
 }

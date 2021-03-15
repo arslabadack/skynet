@@ -18,7 +18,7 @@ public class PostDAO implements InterfaceDAO<Post> {
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			em.getTransaction().rollback();
-			Post original = get(t.getPostId());
+			Post original = get(t.getPostTitle());
 			em.getTransaction().begin();
 			original.setNewPost(t.getNewPost());
 			em.getTransaction().commit();

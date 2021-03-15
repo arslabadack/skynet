@@ -10,7 +10,6 @@ import arslabadack.ifsc.oop2.skynet.AlertUtil;
 import arslabadack.ifsc.oop2.skynet.App;
 import arslabadack.ifsc.oop2.skynet.db.PostDAO;
 import arslabadack.ifsc.oop2.skynet.db.UserDAO;
-import arslabadack.ifsc.oop2.skynet.entities.Events;
 import arslabadack.ifsc.oop2.skynet.entities.Post;
 import arslabadack.ifsc.oop2.skynet.entities.User;
 import javafx.collections.FXCollections;
@@ -28,22 +27,10 @@ import javafx.stage.Stage;
 public class MainController implements Initializable {
 
 	@FXML
-	private Button btnProfile;
-
-	@FXML
 	private Button btnMarketplace;
 
 	@FXML
 	private Button btnEvents;
-
-	@FXML
-	private Button btnPost;
-
-	@FXML
-	private TextField txtNewPost;
-
-	@FXML
-	private ListView<Post> listPosts;
 
 	@FXML
 	private Label lblLoggedUser;
@@ -60,10 +47,55 @@ public class MainController implements Initializable {
 	@FXML
 	private Label lblRelationship;
 
+	@FXML
+	private Button btnSavePost;
+
+	@FXML
+	private Button btnDeletePost;
+
+	@FXML
+	private Button btnClear;
+
+	@FXML
+	private TextField txtPostTitle;
+
+	@FXML
+	private TextField txtPostContent;
+
+	@FXML
+	private Label lblPostContent;
+
+	@FXML
+	private Label lblMyPostContent;
+
+	@FXML
+	private ListView<String> listPosts;
+
+	@FXML
+	private ListView<String> listMyPosts;
+
+	private boolean updating = false;
+
 	private static User user;
-	
+
 	public static void setUser(User u) {
 		user = u;
+	}
+
+	@FXML
+	private void clearFields() {
+		txtPostTitle.clear();
+		txtPostContent.clear();
+		txtPostTitle.setDisable(false);
+
+		defaultLabel();
+		showMyPosts();
+		showAllPosts();
+	}
+
+	private void defaultLabel() {
+		lblPostContent.setText("Post content");
+		lblMyPostContent.setText("Post content");
 	}
 
 	@FXML
@@ -106,32 +138,13 @@ public class MainController implements Initializable {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("events.fxml"));
 			Scene scene = new Scene(fxmlLoader.load());
-			Stage stage = (Stage) btnMarketplace.getScene().getWindow();
+			Stage stage = (Stage) btnEvents.getScene().getWindow();
 			stage.setScene(scene);
 			stage.setResizable(true);
 			stage.show();
 
-			MainController controller = fxmlLoader.getController();
-			controller.userInfo(user);
-
-		} catch (IOException e) {
-			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
-			alert.showAndWait();
-		}
-	}
-
-	@FXML
-	private void post() {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("post.fxml"));
-			Scene scene = new Scene(fxmlLoader.load());
-			Stage stage = (Stage) btnMarketplace.getScene().getWindow();
-			stage.setScene(scene);
-			stage.setResizable(true);
-			stage.show();
-
-			MainController controller = fxmlLoader.getController();
-			controller.userInfo(user);
+			EventsController controller = fxmlLoader.getController();
+			controller.setUser(user);
 
 		} catch (IOException e) {
 			Alert alert = AlertUtil.error("ERROR", "failed to load a component", "Failed to load scene", e);
@@ -150,39 +163,91 @@ public class MainController implements Initializable {
 
 	@FXML
 	private void newPost() {
-		String newPost = txtNewPost.getText();
+		String postTitle = txtPostTitle.getText();
+		String postContent = txtPostContent.getText();
 
-		if (newPost.isBlank()) {
+		if (postTitle.isBlank()) {
+			Alert alert = AlertUtil.error("ERROR", "ERROR", "Missing title", null);
+			alert.showAndWait();
+			return;
+		}
+		if (postContent.isBlank()) {
 			Alert alert = AlertUtil.error("ERROR", "ERROR", "Missing post", null);
 			alert.showAndWait();
 			return;
 		}
 
-		Post ps = new Post(newPost);
+		Post ps = new Post(postTitle, postContent);
 		new PostDAO().persist(ps);
-		if (user.getPosts() == null) {
-			user.setPosts(new ArrayList<Post>());
+		if (!updating) {
+			if (user.getPosts() == null) {
+				user.setPosts(new ArrayList<Post>());
+			}
+			user.getPosts().add(ps);
+			new UserDAO().persist(user);
+		} else {
+			user = new UserDAO().get(user.getUsername());
 		}
-		user.getPosts().add(ps);
-		new UserDAO().persist(user);
-		txtNewPost.clear();
 
-		showPosts();
+		clearFields();
 	}
 
 	@FXML
-	private void showPosts() {
+	private void showMyPosts() {
 		if (user == null)
 			return;
-		List<Post> userPosts = new ArrayList<>();
-		for (Post ps : user.getPosts()) {
-			userPosts.add(new Post(ps.getNewPost()));
+		List<String> userPosts = new ArrayList<>();
+		for (Post pst : user.getPosts()) {
+			userPosts.add(pst.getPostTitle());
 		}
-		listPosts.setItems(FXCollections.observableArrayList(userPosts));
+		listMyPosts.setItems(FXCollections.observableArrayList(userPosts));
+	}
+
+	@FXML
+	private void showAllPosts() {
+		if (user == null)
+			return;
+		List<String> allPosts = new ArrayList<>();
+		for (Post pst : new PostDAO().getAll()) {
+			allPosts.add(pst.getPostTitle());
+		}
+		listPosts.setItems(FXCollections.observableArrayList(allPosts));
+	}
+
+	@FXML
+	private void updateDescription() {
+		String postSelected = listMyPosts.getSelectionModel().getSelectedItem();
+		Post post = new PostDAO().get(postSelected);
+		txtPostTitle.setText(post.getPostTitle());
+		txtPostTitle.setDisable(true);
+		lblMyPostContent.setText(post.getNewPost());
+		btnDeletePost.setDisable(false);
+		updating = true;
+	}
+	
+	@FXML
+	private void updateAllDescription() {
+		String postSelected = listPosts.getSelectionModel().getSelectedItem();
+		Post post = new PostDAO().get(postSelected);
+		lblPostContent.setText(post.getNewPost());
+	}
+
+	@FXML
+	private void removePosts() {
+		String postSelected = listMyPosts.getSelectionModel().getSelectedItem();
+		Post post = new PostDAO().get(postSelected);
+		for (int i = 0; i < user.getPosts().size(); i++) {
+			if (user.getPosts().get(i).getPostTitle().contentEquals(postSelected)) {
+				user.getPosts().remove(i);
+			}
+		}
+		new PostDAO().remove(post);
+		new UserDAO().persist(user);
+		clearFields();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		btnDeletePost.setDisable(true);
 	}
 }

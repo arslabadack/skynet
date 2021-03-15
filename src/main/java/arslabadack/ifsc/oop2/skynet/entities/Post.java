@@ -1,16 +1,13 @@
 package arslabadack.ifsc.oop2.skynet.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Post {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int postId;
+	private String postTitle;
 
 	private String newPost;
 
@@ -18,9 +15,9 @@ public class Post {
 
 	}
 
-	public Post(int postId, String newPost) {
+	public Post(String postTitle, String newPost) {
 		super();
-		this.postId = postId;
+		this.postTitle = postTitle;
 		this.newPost = newPost;
 	}
 
@@ -29,8 +26,12 @@ public class Post {
 		this.newPost = newPost;
 	}
 
-	public int getPostId() {
-		return postId;
+	public String getPostTitle() {
+		return postTitle;
+	}
+
+	public void setPostTitle(String postTitle) {
+		this.postTitle = postTitle;
 	}
 
 	public String getNewPost() {
@@ -45,7 +46,7 @@ public class Post {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + postId;
+		result = prime * result + ((postTitle == null) ? 0 : postTitle.hashCode());
 		return result;
 	}
 
@@ -58,7 +59,10 @@ public class Post {
 		if (getClass() != obj.getClass())
 			return false;
 		Post other = (Post) obj;
-		if (postId != other.postId)
+		if (postTitle == null) {
+			if (other.postTitle != null)
+				return false;
+		} else if (!postTitle.equals(other.postTitle))
 			return false;
 		return true;
 	}

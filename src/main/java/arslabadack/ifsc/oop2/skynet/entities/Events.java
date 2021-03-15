@@ -1,17 +1,12 @@
 package arslabadack.ifsc.oop2.skynet.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Events {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int eventId;
-
 	private String eventName;
 
 	private String eventDate;
@@ -24,30 +19,12 @@ public class Events {
 
 	}
 
-	public Events(int eventId) {
-		super();
-		this.eventId = eventId;
-	}
-
-	public Events(int eventId, String eventName, String eventDate, String eventLocal, String eventDescription) {
-		super();
-		this.eventId = eventId;
-		this.eventName = eventName;
-		this.eventDate = eventDate;
-		this.eventLocal = eventLocal;
-		this.eventDescription = eventDescription;
-	}
-
 	public Events(String eventName, String eventDate, String eventLocal, String eventDescription) {
 		super();
 		this.eventName = eventName;
 		this.eventDate = eventDate;
 		this.eventLocal = eventLocal;
 		this.eventDescription = eventDescription;
-	}
-
-	public int getEventId() {
-		return eventId;
 	}
 
 	public String getEventName() {
@@ -86,7 +63,7 @@ public class Events {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + eventId;
+		result = prime * result + ((eventName == null) ? 0 : eventName.hashCode());
 		return result;
 	}
 
@@ -99,7 +76,10 @@ public class Events {
 		if (getClass() != obj.getClass())
 			return false;
 		Events other = (Events) obj;
-		if (eventId != other.eventId)
+		if (eventName == null) {
+			if (other.eventName != null)
+				return false;
+		} else if (!eventName.equals(other.eventName))
 			return false;
 		return true;
 	}

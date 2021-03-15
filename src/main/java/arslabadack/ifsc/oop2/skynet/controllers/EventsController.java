@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 import arslabadack.ifsc.oop2.skynet.AlertUtil;
 import arslabadack.ifsc.oop2.skynet.App;
 import arslabadack.ifsc.oop2.skynet.db.EventsDAO;
+import arslabadack.ifsc.oop2.skynet.db.MarketplaceDAO;
 import arslabadack.ifsc.oop2.skynet.db.UserDAO;
 import arslabadack.ifsc.oop2.skynet.entities.Events;
+import arslabadack.ifsc.oop2.skynet.entities.Marketplace;
 import arslabadack.ifsc.oop2.skynet.entities.User;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -29,13 +32,13 @@ public class EventsController implements Initializable {
 	private Button btnCreateEvent;
 
 	@FXML
-	private Button btnEventClose;
-
-	@FXML
-	private Button btnSaveEvent;
-
-	@FXML
 	private Button btnDeleteEvent;
+
+	@FXML
+	private Button btnBack;
+
+	@FXML
+	private Button btnConfirm;
 
 	@FXML
 	private TextField txtEventName;
@@ -50,27 +53,48 @@ public class EventsController implements Initializable {
 	private TextField txtEventDescription;
 
 	@FXML
-	private TextField txtEventID;
+	private ListView<String> listEvents;
 
 	@FXML
-	private TextField txtEventNewName;
+	private ListView<String> listMyEvents;
 
 	@FXML
-	private TextField txtEventNewDate;
+	private Label lblEventName;
 
 	@FXML
-	private TextField txtEventNewLocal;
+	private Label lblEventDate;
 
 	@FXML
-	private TextField txtEventNewDescription;
+	private Label lblEventLocal;
 
 	@FXML
-	private ListView<Events> listEvents;
+	private Label lblEventDescription;
 
 	private User user;
-	
+
+	private boolean updating = false;
+
 	public void setUser(User u) {
 		user = u;
+	}
+
+	@FXML
+	private void clearFields() {
+		txtEventName.clear();
+		txtEventDate.clear();
+		txtEventLocal.clear();
+		txtEventDescription.clear();
+		txtEventName.setDisable(false);
+
+		defaultLabel();
+		showEvents();
+	}
+
+	private void defaultLabel() {
+		lblEventName.setText("Event name");
+		lblEventDate.setText("Date");
+		lblEventLocal.setText("Local");
+		lblEventDescription.setText("Description");
 	}
 
 	@FXML
@@ -136,33 +160,65 @@ public class EventsController implements Initializable {
 			alert.showAndWait();
 			return;
 		}
-
 		Events evn = new Events(eventName, eventDate, eventLocal, eventDescription);
 		new EventsDAO().persist(evn);
-		if (user.getEvents() == null) {
-			user.setEvents(new ArrayList<Events>());
+		if (!updating) {
+			if (user.getEvents() == null) {
+				user.setEvents(new ArrayList<Events>());
+			}
+			user.getEvents().add(evn);
+			new UserDAO().persist(user);
+		} else {
+			user = new UserDAO().get(user.getUsername());
 		}
-		user.getEvents().add(evn);
-		new UserDAO().persist(user);
 
-		showEvents();
+		clearFields();
+
 	}
 
 	@FXML
 	private void showEvents() {
 		if (user == null)
 			return;
-		List<Events> userEvents = new ArrayList<>();
+		List<String> userEvents = new ArrayList<>();
 		for (Events evn : user.getEvents()) {
-			userEvents.add(
-					new Events(evn.getEventName(), evn.getEventDate(), evn.getEventLocal(), evn.getEventDescription()));
+			userEvents.add(evn.getEventName());
 		}
 		listEvents.setItems(FXCollections.observableArrayList(userEvents));
 	}
 
+	@FXML
+	private void removeEvents() {
+		String eventSelected = listEvents.getSelectionModel().getSelectedItem();
+		Events event = new EventsDAO().get(eventSelected);
+		for (int i = 0; i < user.getEvents().size(); i++) {
+			if (user.getEvents().get(i).getEventName().contentEquals(eventSelected)) {
+				user.getEvents().remove(i);
+			}
+		}
+		new EventsDAO().remove(event);
+		new UserDAO().persist(user);
+		clearFields();
+	}
+	
+	
+	@FXML
+	private void updateDescription() {
+		String eventSelected = listEvents.getSelectionModel().getSelectedItem();
+		Events event = new EventsDAO().get(eventSelected);
+		txtEventName.setText(event.getEventName());
+		txtEventName.setDisable(true);
+		lblEventName.setText(event.getEventName());
+		lblEventDate.setText(event.getEventDate());
+		lblEventLocal.setText(event.getEventLocal());
+		lblEventDescription.setText(event.getEventDescription());
+		btnDeleteEvent.setDisable(false);
+		updating = true;
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		btnDeleteEvent.setDisable(true);
 
 	}
 

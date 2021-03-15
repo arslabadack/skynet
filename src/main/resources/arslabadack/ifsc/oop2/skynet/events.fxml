@@ -6,14 +6,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1024.0" style="-fx-background-color: #585858;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.controllers.EventsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #585858;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.controllers.EventsController">
    <children>
       <MenuBar layoutX="14.0" layoutY="-1.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" style="-fx-background-color: #E6E6E6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <menus>
@@ -34,112 +32,80 @@
             </Menu>
          </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.42759295499021527" layoutX="110.0" layoutY="338.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="736.0" prefWidth="371.0" style="-fx-background-color: #585858;">
-               <children>
-                  <TabPane layoutX="38.0" layoutY="123.0" prefHeight="611.0" prefWidth="229.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <tabs>
-                        <Tab text="New Event">
-                           <content>
-                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <Label layoutX="36.0" layoutY="164.0" text="Event Name" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventName" layoutX="136.0" layoutY="159.0" prefHeight="25.0" prefWidth="240.0" promptText="Say you naaaame!" AnchorPane.rightAnchor="10.0" />
-                                    <Label layoutX="36.0" layoutY="222.0" text="Save the Date" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventDate" layoutX="136.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" promptText="Remember, friday is the best!" AnchorPane.rightAnchor="10.0" />
-                                    <Label layoutX="36.0" layoutY="282.0" text="Local" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventLocal" layoutX="136.0" layoutY="277.0" prefHeight="25.0" prefWidth="240.0" promptText="Help foreigners" AnchorPane.rightAnchor="10.0" />
-                                    <Label layoutX="36.0" layoutY="351.0" text="Description" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventDescription" layoutX="136.0" layoutY="346.0" prefHeight="160.0" prefWidth="240.0" promptText="Tell about the show!" AnchorPane.rightAnchor="10.0" />
-                                    <Button fx:id="btnCreateEvent" layoutX="264.0" layoutY="401.0" mnemonicParsing="false" onAction="#newEvent" prefHeight="20.0" prefWidth="100.0" text="Create" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="130.0" />
-                                    <Label layoutX="43.0" layoutY="34.0" text="Create an event and share to the world" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="35.0">
-                                       <font>
-                                          <Font name="Arial" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="btnEventClose" layoutX="185.0" layoutY="578.0" mnemonicParsing="false" onAction="#back" prefHeight="20.0" prefWidth="100.0" text="Back" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="10.0" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                        <Tab text="Edit Events">
-                           <content>
-                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0">
-                                 <children>
-                                    <Label layoutX="36.0" layoutY="164.0" text="New Name" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventNewName" layoutX="136.0" layoutY="159.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.rightAnchor="10.0" />
-                                    <Label layoutX="36.0" layoutY="222.0" text="Save the Date" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventNewDate" layoutX="136.0" layoutY="217.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.rightAnchor="10.0" />
-                                    <Label layoutX="36.0" layoutY="282.0" text="New Local" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventNewLocal" layoutX="136.0" layoutY="277.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.rightAnchor="10.0" />
-                                    <Label layoutX="36.0" layoutY="351.0" text="Change Description" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventNewDescription" layoutX="136.0" layoutY="346.0" prefHeight="160.0" prefWidth="240.0" AnchorPane.rightAnchor="10.0" />
-                                    <Button fx:id="btnCreateEvent" layoutX="54.0" layoutY="567.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Save" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="251.0" />
-                                    <Label layoutX="136.0" layoutY="34.0" text="Edit your event" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="136.0">
-                                       <font>
-                                          <Font name="Arial" size="20.0" />
-                                       </font>
-                                    </Label>
-                                    <Button fx:id="btnDeleteEvent" layoutX="174.0" layoutY="567.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="131.0" />
-                                    <Label layoutX="40.0" layoutY="111.0" text="Event ID" textFill="WHITE" AnchorPane.leftAnchor="30.0">
-                                       <font>
-                                          <Font name="Arial" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField fx:id="txtEventID" layoutX="154.0" layoutY="106.0" prefHeight="25.0" prefWidth="240.0" AnchorPane.rightAnchor="10.0" />
-                                    <Button fx:id="btnEventClose" layoutX="281.0" layoutY="567.0" mnemonicParsing="false" onAction="#back" prefHeight="20.0" prefWidth="100.0" text="Back" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="10.0" />
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
-                     </tabs>
-                  </TabPane>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #585858;">
-               <children>
-                  <ListView fx:id="listEvents" layoutX="78.0" layoutY="112.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0" />
-                  <Label layoutX="245.0" layoutY="31.0" text="Events" textFill="WHITE" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="245.0">
-                     <font>
-                        <Font name="Arial" size="30.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <Label layoutX="23.0" layoutY="44.0" text="Create an event and share to the world" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEventName" layoutX="144.0" layoutY="120.0" prefHeight="25.0" prefWidth="240.0" promptText="Say you naaaame!" AnchorPane.leftAnchor="145.0" />
+      <Label layoutX="26.0" layoutY="125.0" text="Event Name" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEventDate" layoutX="144.0" layoutY="165.0" prefHeight="25.0" prefWidth="240.0" promptText="Remember, friday is the best!" AnchorPane.leftAnchor="145.0" />
+      <Label layoutX="20.0" layoutY="170.0" text="Save the Date" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEventLocal" layoutX="145.0" layoutY="207.0" prefHeight="25.0" prefWidth="240.0" promptText="Help foreigners" AnchorPane.leftAnchor="145.0" />
+      <Label layoutX="30.0" layoutY="212.0" text="Local" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCreateEvent" layoutX="47.0" layoutY="348.0" mnemonicParsing="false" onAction="#newEvent" prefHeight="20.0" prefWidth="100.0" text="Save" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="45.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBack" layoutX="285.0" layoutY="345.0" mnemonicParsing="false" onAction="#back" prefHeight="20.0" prefWidth="100.0" text="Back" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="285.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="447.0" layoutY="107.0" prefHeight="622.0" prefWidth="589.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <ListView fx:id="listEvents" layoutX="-156.0" layoutY="-67.0" onMouseClicked="#updateDescription" prefHeight="505.0" prefWidth="258.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="lblEventName" layoutX="366.0" layoutY="42.0" text="Event name" textFill="#585858" wrapText="true" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="30.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblEventDate" layoutX="380.0" layoutY="90.0" text="Date" wrapText="true" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="90.0" />
+            <Label fx:id="lblEventLocal" layoutX="329.0" layoutY="131.0" text="Local" wrapText="true" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="130.0" />
+            <Label fx:id="lblEventDescription" layoutX="327.0" layoutY="181.0" text="Description" wrapText="true" AnchorPane.leftAnchor="270.0" AnchorPane.topAnchor="180.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="420.0" layoutY="50.0" text="Events" textFill="WHITE" AnchorPane.leftAnchor="420.0" AnchorPane.rightAnchor="512.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Arial" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="260.0" text="Description" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEventDescription" alignment="TOP_LEFT" layoutX="144.0" layoutY="260.0" prefHeight="66.0" prefWidth="240.0" promptText="Tell about the party" AnchorPane.leftAnchor="145.0" />
+      <Separator layoutX="409.0" layoutY="286.0" orientation="VERTICAL" prefHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="30.0" />
+      <Separator layoutY="390.0" prefHeight="3.0" prefWidth="410.0" AnchorPane.leftAnchor="0.0" />
+      <Button fx:id="btnDeleteEvent" layoutX="165.0" layoutY="345.0" mnemonicParsing="false" onAction="#removeEvents" prefHeight="20.0" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="400.0" AnchorPane.leftAnchor="165.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnConfirm" layoutX="822.0" layoutY="731.0" mnemonicParsing="false" onAction="#newEvent" prefHeight="3.0" prefWidth="188.0" text="Confirm your presence" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="822.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <ListView fx:id="listMyEvents" layoutX="30.0" layoutY="438.0" prefHeight="280.0" prefWidth="359.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="440.0" />
+      <Label layoutX="25.0" layoutY="405.0" text="Your confirmed events" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

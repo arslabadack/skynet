@@ -1,30 +1,20 @@
 package arslabadack.ifsc.oop2.skynet.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Marketplace {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int productId;
-
 	private String productName;
 
 	private String productPrice;
 
 	private String productDescription;
-	
+
 	public Marketplace() {
 
-	}
-
-	public Marketplace(int productId) {
-		super();
-		this.productId = productId;
 	}
 
 	public Marketplace(String productName, String productPrice, String productDescription) {
@@ -34,8 +24,10 @@ public class Marketplace {
 		this.productDescription = productDescription;
 	}
 
-	public int getProductId() {
-		return productId;
+	public Marketplace(String productPrice, String productDescription) {
+		super();
+		this.productPrice = productPrice;
+		this.productDescription = productDescription;
 	}
 
 	public String getProductName() {
@@ -66,7 +58,7 @@ public class Marketplace {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + productId;
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		return result;
 	}
 
@@ -79,9 +71,11 @@ public class Marketplace {
 		if (getClass() != obj.getClass())
 			return false;
 		Marketplace other = (Marketplace) obj;
-		if (productId != other.productId)
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
 			return false;
 		return true;
 	}
-
 }

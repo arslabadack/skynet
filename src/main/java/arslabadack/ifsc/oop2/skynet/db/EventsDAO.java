@@ -18,9 +18,8 @@ public class EventsDAO implements InterfaceDAO<Events> {
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			em.getTransaction().rollback();
-			Events original = get(t.getEventId());
+			Events original = get(t.getEventName());
 			em.getTransaction().begin();
-			original.setEventName(t.getEventName());
 			original.setEventDate(t.getEventDate());
 			original.setEventLocal(t.getEventLocal());
 			original.setEventDescription(t.getEventDescription());

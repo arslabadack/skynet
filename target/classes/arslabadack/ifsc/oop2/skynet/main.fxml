@@ -6,15 +6,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #BDBDBD;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.controllers.MainController">
+<AnchorPane fx:id="paneMain" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #585858;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arslabadack.ifsc.oop2.skynet.controllers.MainController">
    <children>
-      <MenuBar layoutX="104.0" layoutY="22.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" style="-fx-background-color: #E6E6E6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <MenuBar layoutY="2.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" style="-fx-background-color: #E6E6E6;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -33,49 +32,88 @@
             </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.2" focusTraversable="false" layoutY="48.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1020.0" style="-fx-background-color: #585858;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-        <items>
-          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="245.0" SplitPane.resizableWithParent="false">
-               <children>
-                  <Button fx:id="btnProfile" layoutX="66.0" layoutY="549.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="20.0" prefWidth="100.0" text="Profile" AnchorPane.leftAnchor="65.0">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="btnMarketplace" layoutX="66.0" layoutY="592.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#marketplace" prefHeight="20.0" prefWidth="100.0" text="Marketplace" AnchorPane.leftAnchor="65.0">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="btnPost" layoutX="66.0" layoutY="674.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#post" prefHeight="20.0" prefWidth="100.0" text="Posts" AnchorPane.leftAnchor="65.0">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="btnEvents" layoutX="66.0" layoutY="635.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#events" prefHeight="20.0" prefWidth="100.0" text="Events" AnchorPane.leftAnchor="65.0">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font></Button>
-                  <Label fx:id="lblLoggedUser" layoutX="14.0" layoutY="20.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="lblFullName" layoutX="34.0" layoutY="104.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
-                  <Label fx:id="lblEmail" layoutX="34.0" layoutY="146.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
-                  <Label fx:id="lblBirthdate" layoutX="34.0" layoutY="184.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
-                  <Label fx:id="lblRelationship" layoutX="34.0" layoutY="227.0" text="Label" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
-               </children>
-            </AnchorPane>
-          <AnchorPane>
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
-                  <TextField fx:id="txtNewPost" focusTraversable="false" layoutX="14.0" layoutY="642.0" prefHeight="107.0" promptText="What' s on your mind?" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="100.0" />
-                  <Button fx:id="btnSend" layoutX="691.0" layoutY="615.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newPost" prefHeight="40.0" prefWidth="60.0" text="Send" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="20.0">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font></Button>
-                  <ListView fx:id="listPosts" layoutX="100.0" layoutY="100.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" />
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
+      <TextField fx:id="txtPostContent" alignment="TOP_LEFT" focusTraversable="false" layoutX="120.0" layoutY="596.0" prefHeight="65.0" prefWidth="268.0" promptText="What' s on your mind?" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="600.0" />
+      <Button fx:id="btnSavePost" layoutX="29.0" layoutY="704.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newPost" prefHeight="20.0" prefWidth="100.0" text="Save" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="895.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDeletePost" layoutX="165.0" layoutY="704.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#removePosts" prefHeight="20.0" prefWidth="100.0" text="Delete" AnchorPane.bottomAnchor="44.0" AnchorPane.rightAnchor="759.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="121.0" layoutY="504.0" text="Whats on your mind?" textFill="WHITE" AnchorPane.bottomAnchor="231.0" AnchorPane.leftAnchor="121.0" AnchorPane.topAnchor="504.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="550.0" text="Post Ttitle" textFill="WHITE" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="28.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="596.0" text="Post content" textFill="WHITE" AnchorPane.bottomAnchor="157.0" AnchorPane.leftAnchor="31.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPostTitle" layoutX="120.0" layoutY="545.0" prefHeight="25.0" prefWidth="439.0" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="600.0" />
+      <Button fx:id="btnMarketplace" layoutX="148.0" layoutY="314.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#marketplace" prefHeight="20.0" prefWidth="100.0" text="Marketplace" AnchorPane.bottomAnchor="431.0" AnchorPane.leftAnchor="148.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEvents" layoutX="27.0" layoutY="314.0" maxHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#events" prefHeight="20.0" prefWidth="100.0" text="Events" AnchorPane.bottomAnchor="431.0" AnchorPane.leftAnchor="27.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblLoggedUser" layoutX="26.0" layoutY="44.0" text="Logged User" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFullName" layoutX="30.0" layoutY="95.0" text="Name" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+      <Label fx:id="lblEmail" layoutX="30.0" layoutY="139.0" text="E-mail" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+      <Label fx:id="lblBirthdate" layoutX="30.0" layoutY="193.0" text="Birthdate" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+      <Label fx:id="lblRelationship" layoutX="33.0" layoutY="247.0" text="Relatioship status" textFill="WHITE" AnchorPane.leftAnchor="30.0" />
+      <Separator layoutX="273.0" layoutY="270.0" orientation="VERTICAL" prefHeight="468.0" prefWidth="7.0" AnchorPane.bottomAnchor="271.0" AnchorPane.topAnchor="30.0" />
+      <Label layoutX="295.0" layoutY="47.0" text="Skynet timeline" textFill="WHITE" AnchorPane.leftAnchor="295.0" AnchorPane.topAnchor="47.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="127.0" layoutY="497.0" prefWidth="200.0" AnchorPane.bottomAnchor="270.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <AnchorPane layoutX="295.0" layoutY="75.0" prefHeight="397.0" prefWidth="701.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="295.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <ListView fx:id="listPosts" layoutY="14.0" onMouseClicked="#updateAllDescription" prefHeight="393.0" prefWidth="286.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="413.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="lblPostContent" layoutX="309.0" layoutY="27.0" text="Post content:" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="443.0" layoutY="545.0" prefHeight="203.0" prefWidth="544.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="545.0">
+         <children>
+            <ListView fx:id="listMyPosts" layoutX="-56.0" layoutY="14.0" onMouseClicked="#updateDescription" prefHeight="238.0" prefWidth="213.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="lblMyPostContent" layoutX="233.0" layoutY="20.0" text="Post content:" AnchorPane.leftAnchor="230.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="451.0" layoutY="512.0" text="Your posts" textFill="WHITE" AnchorPane.topAnchor="510.0">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnClear" layoutX="292.0" layoutY="704.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#clearFields" prefHeight="20.0" prefWidth="100.0" text="Clear">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

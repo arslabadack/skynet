@@ -18,9 +18,8 @@ public class MarketplaceDAO implements InterfaceDAO<Marketplace> {
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			em.getTransaction().rollback();
-			Marketplace original = get(t.getProductId());
+			Marketplace original = get(t.getProductName());
 			em.getTransaction().begin();
-			original.setProductName(t.getProductName());
 			original.setProductPrice(t.getProductPrice());
 			original.setProductDescription(t.getProductDescription());
 			em.getTransaction().commit();
